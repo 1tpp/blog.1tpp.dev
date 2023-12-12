@@ -1,15 +1,13 @@
 import { defineConfig } from "astro/config";
 import preact from "@astrojs/preact";
 
-// import vercel from '@astrojs/vercel/serverless';
-import vercel from "@astrojs/vercel/static";
+import vercel from "@astrojs/vercel/static"; // or '@astrojs/vercel/serverless' for SSR
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.1tpp.dev",
   integrations: [preact()],
-  // output: "server", // uncomment this line to use server-side rendering
-  output: "static",
+  output: "static", // use `server` for SSR
   adapter: vercel({
     imageService: true,
     webAnalytics: {
