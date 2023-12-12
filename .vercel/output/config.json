@@ -1,0 +1,26 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"handle": "filesystem"
+		}
+	],
+	"images": {
+		"sizes": [
+			320,
+			640,
+			1280
+		],
+		"domains": [
+			"blog.1tpp.dev"
+		],
+		"remotePatterns": []
+	}
+}

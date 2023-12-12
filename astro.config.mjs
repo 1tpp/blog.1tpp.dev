@@ -9,7 +9,7 @@ export default defineConfig({
   site: "https://blog.1tpp.dev",
   integrations: [preact()],
   // output: "server", // uncomment this line to use server-side rendering
-  output: 'static',
+  output: "static",
   adapter: vercel({
     imageService: true,
     webAnalytics: {
@@ -20,6 +20,7 @@ export default defineConfig({
     },
     imagesConfig: {
       sizes: [320, 640, 1280],
+      domains: ["blog.1tpp.dev"],
     },
   }),
 });
