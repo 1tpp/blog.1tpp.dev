@@ -20,7 +20,7 @@ export default defineConfig({
     },
     imagesConfig: {
       sizes: [320, 640, 1280],
-      domains: ["blog.1tpp.dev"],
+      domains: ["blog.1tpp.dev", "docs.astro.build"],
     },
   }),
 });
