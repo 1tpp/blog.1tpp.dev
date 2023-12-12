@@ -1,16 +1,20 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+import Greeting from "../components/Greeting.jsx";
 
+const allBlogs = await Astro.glob("./blogs/*.md");
+const pageTitle = "Personal Blog | 1tpp.dev";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Personal Blog | 1tpp.dev</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+  <h2>My awesome blog subtitle</h2>
+  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+  <ul>
+    {
+      allBlogs.map((blog) => (
+        <BlogPost url={blog.url} title={blog.frontmatter.title} />
+      ))
+    }
+  </ul>
+</BaseLayout>
