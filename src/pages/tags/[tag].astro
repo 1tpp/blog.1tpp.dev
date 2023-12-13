@@ -1,32 +1,36 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogPost from "../../components/BlogPost.astro";
 
 export async function getStaticPaths() {
-  const allBlogs: any[] = await Astro.glob("../blogs/*.md");
-  return [
-    { params: { tag: "astro" }, props: { blogs: allBlogs } },
-    { params: { tag: "successes" }, props: { blogs: allBlogs } },
-    { params: { tag: "community" }, props: { blogs: allBlogs } },
-    { params: { tag: "blogging" }, props: { blogs: allBlogs } },
-    { params: { tag: "setbacks" }, props: { blogs: allBlogs } },
-    { params: { tag: "learning in public" }, props: { blogs: allBlogs } },
-  ];
+  const allBlogs = await getCollection("blogs");
+  const uniqueTags = [...new Set(allBlogs.map((blog) => blog.data.tags).flat())];
+
+  return uniqueTags.map((tag) => {
+    const filteredBlogs = allBlogs.filter((blog) => blog.data.tags?.includes(tag));
+
+    return {
+      params: {
+        tag,
+      },
+      props: {
+        blogs: filteredBlogs,
+      },
+    };
+  });
 }
 
 const { tag } = Astro.params;
 const { blogs } = Astro.props;
-const filteredBlogs = blogs.filter((blog: { frontmatter: { tags: string | any[]; }; }) =>
-  blog.frontmatter.tags?.includes(tag)
-);
 ---
 
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with {tag}</p>
   <ul>
     {
-      filteredBlogs.map((blog: { url: any; frontmatter: { title: any; }; }) => (
-        <BlogPost url={blog.url} title={blog.frontmatter.title} />
+      blogs.map((blog) => (
+        <BlogPost url={`/blogs/${blog.slug}`} title={blog.data.title} />
       ))
     }
   </ul>

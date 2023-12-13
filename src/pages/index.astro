@@ -3,8 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
 import Greeting from "../components/Greeting.jsx";
 
-const allBlogs = await Astro.glob("./blogs/*.md");
 const pageTitle = "Personal Blog | 1tpp.dev";
+
+import { getCollection } from "astro:content";
+const allBlogs = await getCollection("blogs");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -13,7 +15,7 @@ const pageTitle = "Personal Blog | 1tpp.dev";
   <ul>
     {
       allBlogs.map((blog) => (
-        <BlogPost url={blog.url} title={blog.frontmatter.title} />
+        <BlogPost url={`/blogs/${blog.slug}`} title={blog.data.title} />
       ))
     }
   </ul>

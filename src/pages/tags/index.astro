@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-const allBlogs = await Astro.glob("../blogs/*.md");
-const tags = [...new Set(allBlogs.map((blog) => blog.frontmatter.tags).flat())];
+
+import { getCollection } from "astro:content";
+const allBlogs = await getCollection("blogs");
+const tags = [...new Set(allBlogs.map((blog) => blog.data.tags).flat())];
 const pageTitle = "Tag Index";
 ---
 
