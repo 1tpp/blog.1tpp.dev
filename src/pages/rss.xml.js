@@ -4,9 +4,6 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const blogs = await getCollection('blogs');
   const items =  blogs.map((blog) => ({
-    // title: blog.data.title,
-    // pubDate: blog.data.date,
-    // description: blog.data.description,
     ...blog.data,
     link: `/blogs/${blog.slug}/`,
   }));

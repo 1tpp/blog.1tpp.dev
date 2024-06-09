@@ -50,7 +50,7 @@ const textCase = "uppercase";
   </ul>
   <p>My skills are:</p>
   <ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
+    {skills.map((skill) => <li>{skill}</li>)}
   </ul>
 
   {happy && <p>I am happy to be learning Astro!</p>}
@@ -65,15 +65,3 @@ const textCase = "uppercase";
     )
   }
 </BaseLayout>
-
-<style define:vars={{ skillColor, fontWeight, textCase }}>
-  h1 {
-    color: purple;
-    font-size: 4rem;
-  }
-  .skill {
-    color: var(--skillColor);
-    font-weight: var(--fontWeight);
-    text-transform: var(--textCase);
-  }
-</style>

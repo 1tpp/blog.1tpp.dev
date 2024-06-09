@@ -14,7 +14,7 @@ const allBlogs = await getCollection("blogs");
   <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
   <ul>
     {
-      allBlogs.map((blog) => (
+      allBlogs.map((blog: { slug: string; data: { title: string } }) => (
         <BlogPost url={`/blogs/${blog.slug}`} title={blog.data.title} />
       ))
     }

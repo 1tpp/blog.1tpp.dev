@@ -15,35 +15,14 @@ const tags = frontmatter.tags;
   alt={frontmatter.image.alt} 
   />
 
-  <div class="tags">
+  <div>
     {
       tags.map((tag: string) => (
-        <p class="tag">
+        <p>
           <a href={`/tags/${tag}`}>{tag}</a>
         </p>
       ))
     }
   </div>
-
   <slot />
 </BaseLayout>
-
-<style>
-  a {
-    color: #00539f;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.15em;
-    background-color: #f8fcfd;
-  }
-</style>
